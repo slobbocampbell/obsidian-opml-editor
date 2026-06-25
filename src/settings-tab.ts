@@ -14,8 +14,6 @@ export class OPMLSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		new Setting(containerEl).setName("General").setHeading();
-
 		new Setting(containerEl)
 			.setName("Auto-save")
 			.setDesc("Automatically save changes after a short period of inactivity.")
