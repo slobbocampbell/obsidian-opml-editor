@@ -47,7 +47,7 @@ Search for **OPML Editor** in Settings → Community Plugins → Browse.
 ## Development
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/opml-editor-obsidian
+git clone https://github.com/slobbocampbell/opml-editor-obsidian
 cd opml-editor-obsidian
 npm install
 npm run dev
