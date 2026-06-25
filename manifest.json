@@ -1,0 +1,10 @@
+{
+	"id": "opml-editor",
+	"name": "OPML Editor",
+	"version": "1.0.0",
+	"minAppVersion": "1.4.0",
+	"description": "View and edit OPML files as interactive, collapsible outline trees directly in Obsidian.",
+	"author": "Rob",
+	"authorUrl": "https://github.com/YOUR_GITHUB_USERNAME",
+	"isDesktopOnly": true
+}

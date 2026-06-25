@@ -1,0 +1,303 @@
+/* =========================================================
+   OPML Editor — Styles
+   All colours use Obsidian CSS variables for full theme
+   compatibility. All class names are prefixed with opml-.
+   ========================================================= */
+
+.opml-editor-view {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	font-family: var(--font-interface);
+	font-size: var(--font-ui-medium);
+	color: var(--text-normal);
+}
+
+/* --- Toolbar ------------------------------------------------ */
+
+.opml-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 10px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+	flex-shrink: 0;
+}
+
+.opml-toolbar-btn {
+	background: var(--interactive-normal);
+	color: var(--text-normal);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	padding: 3px 10px;
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+	transition: background 0.1s;
+}
+
+.opml-toolbar-btn:hover {
+	background: var(--interactive-hover);
+}
+
+.opml-toolbar-btn--right {
+	margin-left: auto;
+}
+
+/* --- Tree area ---------------------------------------------- */
+
+.opml-tree {
+	flex: 1;
+	overflow-y: auto;
+	padding: 8px 0;
+}
+
+.opml-tree-root {
+	user-select: none;
+}
+
+/* --- Node row ----------------------------------------------- */
+
+.opml-node {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 8px;
+	border-radius: var(--radius-s);
+	cursor: default;
+	transition: background-color 0.1s;
+	background-color: var(--opml-depth-bg, transparent);
+}
+
+.opml-node:hover {
+	background-color: var(--background-modifier-hover);
+}
+
+.opml-node--selected {
+	background-color: var(--background-modifier-active-hover);
+}
+
+.opml-node--dragging {
+	opacity: 0.4;
+}
+
+.opml-node--drag-over {
+	outline: 2px solid var(--interactive-accent);
+	outline-offset: -2px;
+	border-radius: var(--radius-s);
+}
+
+/* --- Toggle button ------------------------------------------ */
+
+.opml-node-toggle {
+	flex-shrink: 0;
+	width: 16px;
+	text-align: center;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-size: 10px;
+	line-height: 1;
+	transition: color 0.1s;
+}
+
+.opml-node-toggle:hover {
+	color: var(--text-normal);
+}
+
+.opml-node-toggle--leaf {
+	cursor: default;
+	font-size: 6px;
+}
+
+/* --- Node text --------------------------------------------- */
+
+.opml-node-text {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	outline: none;
+	cursor: text;
+}
+
+.opml-node-text:focus {
+	color: var(--text-accent);
+}
+
+/* --- Inline edit input ------------------------------------- */
+
+.opml-node-edit-input {
+	flex: 1;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	border: 1px solid var(--interactive-accent);
+	border-radius: var(--radius-s);
+	padding: 1px 4px;
+	font-size: inherit;
+	font-family: inherit;
+	outline: none;
+	min-width: 0;
+}
+
+/* --- Note line --------------------------------------------- */
+
+.opml-node-note {
+	font-style: italic;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	padding-top: 0;
+	padding-bottom: 3px;
+	padding-right: 8px;
+	line-height: 1.4;
+	background-color: var(--opml-depth-bg, transparent);
+}
+
+/* --- Raw XML textarea -------------------------------------- */
+
+.opml-raw-xml {
+	flex: 1;
+	width: 100%;
+	box-sizing: border-box;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	border: none;
+	padding: 12px;
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-small);
+	resize: none;
+	outline: none;
+}
+
+/* --- Detail panel ------------------------------------------ */
+
+.opml-detail-panel {
+	flex-shrink: 0;
+	border-top: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+	padding: 8px 12px;
+	max-height: 220px;
+	overflow-y: auto;
+}
+
+.opml-detail-heading {
+	margin: 0 0 6px 0;
+	font-size: var(--font-ui-small);
+	color: var(--text-muted);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.opml-detail-empty {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	margin: 0;
+}
+
+.opml-detail-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 4px;
+}
+
+.opml-detail-label {
+	min-width: 80px;
+	font-size: var(--font-ui-small);
+	color: var(--text-muted);
+	font-weight: 600;
+}
+
+.opml-detail-input {
+	flex: 1;
+	font-size: var(--font-ui-small);
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	padding: 2px 6px;
+	color: var(--text-normal);
+}
+
+.opml-detail-del-btn {
+	background: none;
+	border: none;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	padding: 0 4px;
+}
+
+.opml-detail-del-btn:hover {
+	color: var(--text-error);
+}
+
+.opml-detail-add-row {
+	display: flex;
+	gap: 6px;
+	margin-top: 8px;
+	padding-top: 6px;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+.opml-detail-new-key,
+.opml-detail-new-val {
+	flex: 1;
+	font-size: var(--font-ui-small);
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	padding: 2px 6px;
+	color: var(--text-normal);
+}
+
+.opml-detail-add-btn {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border: none;
+	border-radius: var(--radius-s);
+	padding: 2px 10px;
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+}
+
+.opml-detail-add-btn:hover {
+	background: var(--interactive-accent-hover);
+}
+
+/* =========================================================
+   Level colour palettes
+   --opml-depth-bg is set on .opml-depth-N elements so both
+   .opml-node and .opml-node-note pick it up automatically.
+   Hover and selected states override background-color
+   directly, so they always take precedence.
+   ========================================================= */
+
+/* --- Muted: very subtle tints, ~8% opacity ----------------- */
+
+.opml-tree.opml-palette-muted .opml-depth-0 { --opml-depth-bg: hsla(210, 70%, 65%, 0.08); }
+.opml-tree.opml-palette-muted .opml-depth-1 { --opml-depth-bg: hsla(130, 55%, 52%, 0.08); }
+.opml-tree.opml-palette-muted .opml-depth-2 { --opml-depth-bg: hsla(30,  80%, 62%, 0.08); }
+.opml-tree.opml-palette-muted .opml-depth-3 { --opml-depth-bg: hsla(280, 52%, 64%, 0.08); }
+.opml-tree.opml-palette-muted .opml-depth-4 { --opml-depth-bg: hsla(0,   65%, 63%, 0.08); }
+
+/* --- Bright: same hues, ~22% opacity ----------------------- */
+
+.opml-tree.opml-palette-bright .opml-depth-0 { --opml-depth-bg: hsla(210, 70%, 65%, 0.22); }
+.opml-tree.opml-palette-bright .opml-depth-1 { --opml-depth-bg: hsla(130, 55%, 52%, 0.22); }
+.opml-tree.opml-palette-bright .opml-depth-2 { --opml-depth-bg: hsla(30,  80%, 62%, 0.22); }
+.opml-tree.opml-palette-bright .opml-depth-3 { --opml-depth-bg: hsla(280, 52%, 64%, 0.22); }
+.opml-tree.opml-palette-bright .opml-depth-4 { --opml-depth-bg: hsla(0,   65%, 63%, 0.22); }
+
+/* --- Color-blindness friendly: Okabe-Ito palette ----------- */
+/*   Sky blue, Bluish green, Orange, Reddish purple, Blue      */
+/*   Avoids red/green pairs; safe for deuteranopia/protanopia  */
+
+.opml-tree.opml-palette-colorblind .opml-depth-0 { --opml-depth-bg: hsla(201, 76%, 57%, 0.13); }
+.opml-tree.opml-palette-colorblind .opml-depth-1 { --opml-depth-bg: hsla(164, 100%, 31%, 0.11); }
+.opml-tree.opml-palette-colorblind .opml-depth-2 { --opml-depth-bg: hsla(42,  100%, 45%, 0.13); }
+.opml-tree.opml-palette-colorblind .opml-depth-3 { --opml-depth-bg: hsla(317,  47%, 56%, 0.13); }
+.opml-tree.opml-palette-colorblind .opml-depth-4 { --opml-depth-bg: hsla(202, 100%, 35%, 0.13); }
