@@ -101,7 +101,7 @@ export class OPMLParser {
 	}
 
 	serialize(doc: OPMLDocument): string {
-		const xmlDoc = document.implementation.createDocument(
+		const xmlDoc = activeDocument.implementation.createDocument(
 			null,
 			"opml",
 			null

@@ -4,6 +4,10 @@
    compatibility. All class names are prefixed with opml-.
    ========================================================= */
 
+.opml-hidden {
+	display: none !important;
+}
+
 .opml-editor-view {
 	display: flex;
 	flex-direction: column;

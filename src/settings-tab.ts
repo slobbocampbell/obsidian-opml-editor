@@ -14,7 +14,7 @@ export class OPMLSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		containerEl.createEl("h2", { text: "OPML Editor Settings" });
+		new Setting(containerEl).setName("OPML Editor Settings").setHeading();
 
 		new Setting(containerEl)
 			.setName("Auto-save")
@@ -35,7 +35,6 @@ export class OPMLSettingTab extends PluginSettingTab {
 				slider
 					.setLimits(100, 5000, 100)
 					.setValue(this.plugin.settings.autoSaveDelayMs)
-					.setDynamicTooltip()
 					.onChange(async (value) => {
 						this.plugin.settings.autoSaveDelayMs = value;
 						await this.plugin.saveSettings();

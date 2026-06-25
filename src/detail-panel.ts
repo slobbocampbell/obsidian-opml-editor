@@ -21,7 +21,7 @@ export class DetailPanel {
 	hide(): void {
 		this.currentNode = null;
 		this.container.empty();
-		this.container.style.display = "none";
+		this.container.addClass("opml-hidden");
 	}
 
 	private render(): void {
@@ -29,7 +29,7 @@ export class DetailPanel {
 		if (!node) return;
 
 		this.container.empty();
-		this.container.style.display = "";
+		this.container.removeClass("opml-hidden");
 
 		this.container.createEl("div", {
 			cls: "opml-detail-heading",

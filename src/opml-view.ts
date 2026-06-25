@@ -12,7 +12,8 @@ export class OPMLView extends TextFileView {
 	private doc: OPMLDocument | null = null;
 	private renderer: TreeRenderer | null = null;
 	private detailPanel: DetailPanel | null = null;
-	private saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+	private saveDebounceTimer: ReturnType<typeof window.setTimeout> | null =
+		null;
 
 	private toolbarEl!: HTMLDivElement;
 	private treeEl!: HTMLDivElement;
@@ -57,9 +58,8 @@ export class OPMLView extends TextFileView {
 		}
 
 		if (this.treeEl) {
-			this.treeEl.style.display = "";
-			this.detailEl.style.display = "";
-			this.rawEl.style.display = "none";
+			this.treeEl.removeClass("opml-hidden");
+			this.rawEl.addClass("opml-hidden");
 			this.isRawMode = false;
 			this.render();
 		}
@@ -89,18 +89,26 @@ export class OPMLView extends TextFileView {
 
 		this.treeEl = container.createDiv({ cls: "opml-tree" });
 
-		this.detailEl = container.createDiv({ cls: "opml-detail-panel" });
-		this.detailEl.style.display = "none";
+		// starts hidden; DetailPanel.show() / .hide() manage visibility
+		this.detailEl = container.createDiv({
+			cls: "opml-detail-panel opml-hidden",
+		});
 		this.detailPanel = new DetailPanel(this.detailEl, (node) => {
 			this.onAttributesChanged(node);
 		});
 
-		this.rawEl = container.createEl("textarea", { cls: "opml-raw-xml" });
-		this.rawEl.style.display = "none";
+		// starts hidden; toggled by showRawMode / toggleRawMode
+		this.rawEl = container.createEl("textarea", {
+			cls: "opml-raw-xml opml-hidden",
+		});
 		this.rawEl.addEventListener("input", () => this.scheduleSave());
 
-		this.registerDomEvent(document, "keydown", (e: KeyboardEvent) => {
-			if ((e.metaKey || e.ctrlKey) && e.key === "s" && this.isActiveView()) {
+		this.registerDomEvent(activeDocument, "keydown", (e: KeyboardEvent) => {
+			if (
+				(e.metaKey || e.ctrlKey) &&
+				e.key === "s" &&
+				this.isActiveView()
+			) {
 				e.preventDefault();
 				void this.saveFile();
 			}
@@ -109,7 +117,7 @@ export class OPMLView extends TextFileView {
 
 	async onClose(): Promise<void> {
 		if (this.saveDebounceTimer) {
-			clearTimeout(this.saveDebounceTimer);
+			window.clearTimeout(this.saveDebounceTimer);
 			this.saveDebounceTimer = null;
 		}
 		this.renderer = null;
@@ -268,8 +276,9 @@ export class OPMLView extends TextFileView {
 
 	private scheduleSave(): void {
 		if (!this.plugin.settings.autoSave) return;
-		if (this.saveDebounceTimer) clearTimeout(this.saveDebounceTimer);
-		this.saveDebounceTimer = setTimeout(() => {
+		if (this.saveDebounceTimer)
+			window.clearTimeout(this.saveDebounceTimer);
+		this.saveDebounceTimer = window.setTimeout(() => {
 			void this.saveFile();
 		}, this.plugin.settings.autoSaveDelayMs);
 	}
@@ -288,9 +297,8 @@ export class OPMLView extends TextFileView {
 		if (this.isRawMode) {
 			try {
 				this.doc = this.parser.parse(this.rawEl.value);
-				this.rawEl.style.display = "none";
-				this.treeEl.style.display = "";
-				this.detailEl.style.display = "";
+				this.rawEl.addClass("opml-hidden");
+				this.treeEl.removeClass("opml-hidden");
 				this.isRawMode = false;
 				this.render();
 			} catch {
@@ -304,10 +312,10 @@ export class OPMLView extends TextFileView {
 	}
 
 	private showRawMode(xml: string): void {
-		this.treeEl.style.display = "none";
-		this.detailEl.style.display = "none";
+		this.treeEl.addClass("opml-hidden");
+		this.detailEl.addClass("opml-hidden");
 		this.rawEl.value = xml;
-		this.rawEl.style.display = "";
+		this.rawEl.removeClass("opml-hidden");
 		this.isRawMode = true;
 	}
 

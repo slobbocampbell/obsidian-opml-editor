@@ -178,7 +178,7 @@ export class TreeRenderer {
 	private startEdit(node: OutlineNode, textEl: HTMLElement): void {
 		const originalText = node.text;
 
-		const input = document.createElement("input");
+		const input = this.container.ownerDocument.createElement("input");
 		input.type = "text";
 		input.value = originalText;
 		input.className = "opml-node-edit-input";
